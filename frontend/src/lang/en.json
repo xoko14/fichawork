@@ -1,0 +1,39 @@
+{
+  "account": {
+    "greeting": "Hello, {name}",
+    "logout": "Log out"
+  },
+  "about": {
+    "desc": "Keep track, edit and export clock-in and clock-out times.",
+    "repodesc": "Source code avaliable at",
+    "repo": "repo",
+    "madeby": "Made by"
+  },
+  "signin": {
+    "nameverification": "Name must be between 1 and 100 characters.",
+    "passwordmatch": "Passwords must match.",
+    "usernameverification": "Username must have between 1 and 10 characters and only contain letters, numbers, <code>-</code> or <code>_</code>.",
+    "passwordverification": "Password must be between 8 and 32 characters and inlude at least one uppercase, lowercase, number and special character.",
+    "creationerror": "Error creating account.",
+    "creationsuccess": "Sign in successful."
+  },
+  "general": {
+    "signin": "Sign in",
+    "login": "Log in",
+    "clockin": "Clock in",
+    "history": "Past shifts",
+    "account": "Account",
+    "export": "Export shifts",
+    "about": "About"
+  },
+  "user": {
+    "name": "Name",
+    "username": "Username",
+    "password": "Password",
+    "rpassword": "Repeat password"
+  },
+  "login": {
+    "success": "Log in successful.",
+    "error": "Incorrect username/password"
+  }
+}

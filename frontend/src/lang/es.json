@@ -1,0 +1,39 @@
+{
+  "account": {
+    "greeting": "Hola, {name}",
+    "logout": "Cerrar sesión"
+  },
+  "about": {
+    "desc": "Anota, edita y exporta tus horarios de entrada y salida.",
+    "repodesc": "Código fuente disponible en el",
+    "repo": "repositorio",
+    "madeby": "Hecho por"
+  },
+  "signin": {
+    "usernameverification": "El identificador debe estar formado por entre 1 y 10 caracteres y contener solo letras, números, <code>-</code> o <code>_</code>.",
+    "creationerror": "Error creando la cuenta.",
+    "creationsuccess": "Creación de cuenta satisfactoria.",
+    "nameverification": "El nombre debe tener entre 1 y 100 caracteres.",
+    "passwordmatch": "Las contraseñas deben coincidir.",
+    "passwordverification": "La contraseña debe de tener entre 8 y 32 caracteres e incuir, por lo menos, una minúscula, mayúscula, un número y un caracter especial."
+  },
+  "general": {
+    "login": "Iniciar sesión",
+    "signin": "Crear cuenta",
+    "about": "Acerca de",
+    "account": "Cuenta",
+    "clockin": "Fichar",
+    "export": "Exportar turnos",
+    "history": "Turnos anteriores"
+  },
+  "login": {
+    "error": "Identificador/contraseña incorrectos",
+    "success": "Inicio de sesión correcto"
+  },
+  "user": {
+    "name": "Nombre",
+    "password": "Contraseña",
+    "rpassword": "Repetir contraseña",
+    "username": "Identificador"
+  }
+}
