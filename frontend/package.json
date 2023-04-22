@@ -10,24 +10,24 @@
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^1.0.1",
-    "@tsconfig/svelte": "^3.0.0",
-    "autoprefixer": "^10.4.8",
-    "postcss": "^8.4.16",
-    "svelte": "^3.49.0",
-    "svelte-check": "^2.8.0",
-    "svelte-preprocess": "^4.10.7",
-    "tailwindcss": "^3.1.8",
-    "tslib": "^2.4.0",
-    "typescript": "^4.6.4",
-    "vite": "^3.0.7"
+    "@sveltejs/vite-plugin-svelte": "^2.1.0",
+    "@tsconfig/svelte": "^4.0.1",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.23",
+    "svelte": "^3.58.0",
+    "svelte-check": "^3.2.0",
+    "svelte-preprocess": "^5.0.3",
+    "tailwindcss": "^3.3.1",
+    "tslib": "^2.5.0",
+    "typescript": "^5.0.4",
+    "vite": "^4.3.1"
   },
   "dependencies": {
-    "@mdi/font": "^7.0.96",
-    "bcrypt": "^5.0.1",
+    "@mdi/font": "^7.2.96",
+    "bcrypt": "^5.1.0",
     "class-transformer": "^0.5.1",
     "reflect-metadata": "^0.1.13",
-    "svelte-i18n": "^3.4.0",
-    "svelte-material-icons": "^2.0.4"
+    "svelte-i18n": "^3.6.0",
+    "svelte-material-icons": "^3.0.4"
   }
 }

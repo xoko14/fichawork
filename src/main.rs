@@ -1,8 +1,7 @@
 use axum::{
     body::{boxed, Body},
     http::{Response, StatusCode},
-    response::IntoResponse,
-    routing::get,
+    routing::{get, post, put},
     Router,
 };
 use clap::Parser;
@@ -15,11 +14,21 @@ use std::{
 use tower::{ServiceBuilder, ServiceExt};
 use tower_http::{services::ServeDir, trace::TraceLayer};
 
+mod auth;
 mod db;
+mod entities;
+mod errors;
 mod models;
+mod openapi;
 mod repositories;
 mod routes;
 mod services;
+mod utils;
+
+lazy_static::lazy_static! {
+    pub static ref JWT_SECRET: String =
+        env::var("JWT_SECRET").expect("Missing env var: JWT_SECRET");
+}
 
 #[derive(Parser, Debug)]
 #[clap(name = "server", about = "fichawork server")]
@@ -43,6 +52,7 @@ struct Opt {
 #[tokio::main]
 async fn main() {
     let opt = Opt::parse();
+    let _ = dotenv::dotenv().ok();
 
     if env::var("RUST_LOG").is_err() {
         env::set_var("RUST_LOG", format!("{},hyper=info,mio=info", opt.log_level))
@@ -53,8 +63,15 @@ async fn main() {
     let db_conn = db::get_db_conn(opt.db_conn).await;
 
     let app = Router::new()
-        .route("/test/hello", get(hello))
-        .nest("/api", Router::new().route("/dbtest", get(routes::dbtest)))
+        .nest(
+            "/api",
+            Router::new()
+                .route("/auth/token", post(routes::get_token))
+                .route("/users", post(routes::create_user))
+                .route("/users/me", get(routes::get_logged_user))
+                .route("/users/me", put(routes::update_logged_user)),
+        )
+        .merge(openapi::swagger_ui())
         .with_state(db_conn)
         .fallback_service(get(|req| async move {
             match ServeDir::new(opt.static_dir).oneshot(req).await {
@@ -78,8 +95,4 @@ async fn main() {
         .serve(app.into_make_service())
         .await
         .expect("Unable to start server");
-}
-
-async fn hello() -> impl IntoResponse {
-    "hello"
 }
