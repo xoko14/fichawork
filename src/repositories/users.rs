@@ -31,7 +31,6 @@ pub async fn create_user(
         name: Set(user.name),
         ..Default::default()
     };
-
     _ = user.insert(db).await?;
     Ok(())
 }

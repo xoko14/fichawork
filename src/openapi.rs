@@ -9,14 +9,16 @@ use utoipa_swagger_ui::SwaggerUi;
     paths(
         crate::routes::get_token,
         crate::routes::create_user,
-        crate::routes::get_logged_user
+        crate::routes::get_logged_user,
+        crate::routes::update_logged_user
     ),
     components(schemas(
         crate::errors::ProblemDetails,
         crate::models::auth::TokenPayload,
         crate::models::auth::LoginCredentials,
         crate::models::user::UserCreate,
-        crate::models::user::User
+        crate::models::user::User,
+        crate::models::user::UserUpdate
     )),
     modifiers(&UserAuthAddon)
 )]

@@ -1,8 +1,8 @@
 use axum::{
     async_trait,
-    extract::FromRequest,
+    extract::FromRequestParts,
     headers::{authorization::Bearer, Authorization},
-    http::Request,
+    http::request::Parts,
     TypedHeader,
 };
 
@@ -11,16 +11,15 @@ use crate::{errors::ApiError, utils::jwt};
 pub struct UserAuth(pub i32);
 
 #[async_trait]
-impl<S, B> FromRequest<S, B> for UserAuth
+impl<S> FromRequestParts<S> for UserAuth
 where
-    B: Send + 'static,
     S: Send + Sync,
 {
     type Rejection = ApiError;
 
-    async fn from_request(req: Request<B>, state: &S) -> Result<Self, Self::Rejection> {
+    async fn from_request_parts(parts: &mut Parts, state: &S) -> Result<Self, Self::Rejection> {
         let TypedHeader(Authorization(bearer)) =
-            TypedHeader::<Authorization<Bearer>>::from_request(req, state)
+            TypedHeader::<Authorization<Bearer>>::from_request_parts(parts, state)
                 .await
                 .map_err(|_| ApiError::unauthorized())?;
         let claims = jwt::verify_jwt(bearer.token())?;

@@ -24,8 +24,10 @@ export class ApiClient{
         let postfields = new URLSearchParams()
         postfields.append("username", username)
         postfields.append("password", password)
+        postfields.append("grant_type", "password")
+        postfields.append("scope", "user")
 
-        var response = await fetch("api/token", {
+        var response = await fetch("api/auth/token", {
             method: "POST",
             body: postfields//`grant_type=&username=${username}&password=${password}&scope=&client_id=&client_secret=`
         })

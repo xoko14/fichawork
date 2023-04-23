@@ -29,6 +29,21 @@ pub async fn get_token(
 }
 
 #[utoipa::path(
+    post,
+    path = "/api/users",
+    request_body = UserCreate,
+    responses(
+        (status = 200, description = "User created successfuly")
+    )
+)]
+pub async fn create_user(
+    State(db): State<DbConn>,
+    Json(user): Json<UserCreate>,
+) -> Result<(), ApiError> {
+    services::users::create_user(&db, user).await
+}
+
+#[utoipa::path(
     get,
     path = "/api/users/me",
     responses(
@@ -48,23 +63,21 @@ pub async fn get_logged_user(
 }
 
 #[utoipa::path(
-    post,
-    path = "/api/users",
-    request_body = UserCreate,
+    put,
+    path = "/api/users/me",
+    request_body = UserUpdate,
     responses(
-        (status = 200, description = "User created successfuly")
+        (status = 200, description = "User created successfuly"),
+        (status = 401, description = "Unable to authenticate", body = ProblemDetails)
+    ),
+    security(
+        ("Bearer token"=["user"])
     )
 )]
-pub async fn create_user(
-    State(db): State<DbConn>,
-    Json(user): Json<UserCreate>,
-) -> Result<(), ApiError> {
-    services::users::create_user(&db, user).await
-}
-
 pub async fn update_logged_user(
     State(db): State<DbConn>,
+    UserAuth(user_id): UserAuth,
     Json(update): Json<UserUpdate>,
 ) -> Result<(), ApiError> {
-    todo!()
+    services::users::update_user_by_id(&db, user_id, update).await
 }
